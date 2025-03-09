@@ -4,10 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const regionFilter = document.getElementById("region-filter");
     const modeSwitcher = document.getElementById("mode-switcher");
 
-    function showLoading() {
-        container.innerHTML = `<div class="spinner-border" role="status"></div>`;
-    }
-
     function fetchCountries(url) {
 
         showLoading();
