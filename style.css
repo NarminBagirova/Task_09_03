@@ -36,6 +36,7 @@ body.dark-mode .country-card {
 
 .navbar {
     background-color: #fff;
+    margin-bottom: 30px;
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
