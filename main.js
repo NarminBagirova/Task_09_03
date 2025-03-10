@@ -9,26 +9,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function fetchCountries(url) {
-
         showLoading();
-
+    
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                const container = document.getElementById("countries-container");
                 container.innerHTML = "";
                 data.forEach(country => {
                     const countryCard = document.createElement("div");
                     countryCard.classList.add("country-card");
                     countryCard.innerHTML = `
-                    <h5>${country.name.common}</h5>
-                    <img src="${country.flags.png}" alt="${country.name.common}">
-                    <p><strong>Region:</strong> ${country.region}</p>
-                    <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
-                    <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : "N/A"}</p>
+                        <h5>${country.name.common}</h5>
+                        <img src="${country.flags.png}" alt="${country.name.common}" style="width: 100%; max-height: 150px; object-fit: cover;">
+                        <p><strong>Region:</strong> ${country.region}</p>
+                        <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
+                        <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : "N/A"}</p>
                     `;
+    
+                    countryCard.addEventListener("click", () => {
+                        window.location.href = `details.html?name=${encodeURIComponent(country.name.common)}`;
+                    });
+    
                     container.appendChild(countryCard);
                 });
+            })
+            .catch(error => {
+                console.error("Error fetching countries:", error);
+                container.innerHTML = `<p class="text-danger">Failed to load data. Please try again later.</p>`;
             });
     }
 
